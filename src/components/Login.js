@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login({setIsAuth}) {
 
-  //リダイレクト処理
+  //遷移先を指定できる処理を用意
   const navigate = useNavigate();
 
   const loginWithGoogle = () => {
@@ -16,6 +16,7 @@ export default function Login({setIsAuth}) {
       localStorage.setItem("isAuth",true)
       setIsAuth(true)
       console.log(result)
+      //homeへリダイレクト
       navigate("/")
     });
   }
