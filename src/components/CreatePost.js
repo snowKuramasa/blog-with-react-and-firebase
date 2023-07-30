@@ -1,13 +1,28 @@
 import React, { useState } from 'react'
 import "./CreatePost.css"
+import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export const CreatePost = () => {
 
   const [title, setTitle] = useState();
   const [postText, setPostText] = useState();
-  const createPost = () => {
-    console.log(title)
-    console.log(postText)
+
+  const navigate = useNavigate();
+
+  const createPost = async () => {
+    //cloud fire store のコレクションルールを初期状態からwriteをtrueにする必要あり
+    await addDoc(collection(db, "posts"), {
+      title:title,
+      postText:postText,
+      author:{
+        username:auth.currentUser.displayName,
+        id: auth.currentUser.uid
+      }
+    })
+    //投稿の跡ホームへ
+    navigate("/")
   }
 
 
