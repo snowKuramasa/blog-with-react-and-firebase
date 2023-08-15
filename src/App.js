@@ -11,7 +11,8 @@ import { useState } from 'react';
 function App() {
 
   //ログインしているかどうかの状態変数
-  const [isAuth, setIsAuth] = useState(false);
+  //初期値をローカルストレージの値を取得
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
   return (
     <Router>
